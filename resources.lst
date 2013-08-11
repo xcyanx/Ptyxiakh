@@ -1,0 +1,1148 @@
+.res NORTH
+.ubin
+.media "audio/mpeg", "Sounds/North.mp3"
+
+.res SOUTH
+.ubin
+.media "audio/mpeg", "Sounds/South.mp3"
+
+.res WEST
+.ubin
+.media "audio/mpeg", "Sounds/West.mp3"
+
+.res EAST
+.ubin
+.media "audio/mpeg", "Sounds/East.mp3"
+
+.res WRONG
+.ubin
+.media "audio/mpeg", "Sounds/Wrong.mp3"
+
+.res NORTH_EAST
+.ubin
+.media "audio/mpeg", "Sounds/North East.mp3"
+
+.res NORTH_WEST
+.ubin
+.media "audio/mpeg", "Sounds/North West.mp3"
+
+.res SOUTH_EAST
+.ubin
+.media "audio/mpeg", "Sounds/South East.mp3"
+
+.res SOUTH_WEST
+.ubin
+.media "audio/mpeg", "Sounds/South West.mp3"
+
+.res SELECTED_IMG
+.ubin
+.image "Images/background_tile_sel.png"
+
+.res UNSELECTED_IMG
+.ubin
+.image "Images/background_tile_unsel.png"
+
+.res MY_FONT
+.bin
+.include "fonts/Fonts2.mof"
+
+.res BUTTON_IMG
+.ubin
+.image "Images/Button.png"
+
+.res BUTTON_IMG_INAC
+.ubin
+.image "Images/Button 2.png"
+
+.res MAPPIN
+.ubin
+.image "Images/pin.png"
+
+.res ZOOM_IN
+.ubin
+.image "Images/ZI.png"
+
+.res ZOOM_OUT
+.ubin
+.image "Images/ZO.png"
+
+.res ARROW_ANIMATION
+.skip
+.image "Images/GPS_PNGs/360.png"
+.res
+.skip
+.image "Images/GPS_PNGs/359.png"
+.res
+.skip
+.image "Images/GPS_PNGs/358.png"
+.res
+.skip
+.image "Images/GPS_PNGs/357.png"
+.res
+.skip
+.image "Images/GPS_PNGs/356.png"
+.res
+.skip
+.image "Images/GPS_PNGs/355.png"
+.res
+.skip
+.image "Images/GPS_PNGs/354.png"
+.res
+.skip
+.image "Images/GPS_PNGs/353.png"
+.res
+.skip
+.image "Images/GPS_PNGs/352.png"
+.res
+.skip
+.image "Images/GPS_PNGs/351.png"
+.res
+.skip
+.image "Images/GPS_PNGs/350.png"
+.res
+.skip
+.image "Images/GPS_PNGs/349.png"
+.res
+.skip
+.image "Images/GPS_PNGs/348.png"
+.res
+.skip
+.image "Images/GPS_PNGs/347.png"
+.res
+.skip
+.image "Images/GPS_PNGs/346.png"
+.res
+.skip
+.image "Images/GPS_PNGs/345.png"
+.res
+.skip
+.image "Images/GPS_PNGs/344.png"
+.res
+.skip
+.image "Images/GPS_PNGs/343.png"
+.res
+.skip
+.image "Images/GPS_PNGs/342.png"
+.res
+.skip
+.image "Images/GPS_PNGs/341.png"
+.res
+.skip
+.image "Images/GPS_PNGs/340.png"
+.res
+.skip
+.image "Images/GPS_PNGs/339.png"
+.res
+.skip
+.image "Images/GPS_PNGs/338.png"
+.res
+.skip
+.image "Images/GPS_PNGs/337.png"
+.res
+.skip
+.image "Images/GPS_PNGs/336.png"
+.res
+.skip
+.image "Images/GPS_PNGs/335.png"
+.res
+.skip
+.image "Images/GPS_PNGs/334.png"
+.res
+.skip
+.image "Images/GPS_PNGs/333.png"
+.res
+.skip
+.image "Images/GPS_PNGs/332.png"
+.res
+.skip
+.image "Images/GPS_PNGs/331.png"
+.res
+.skip
+.image "Images/GPS_PNGs/330.png"
+.res
+.skip
+.image "Images/GPS_PNGs/329.png"
+.res
+.skip
+.image "Images/GPS_PNGs/328.png"
+.res
+.skip
+.image "Images/GPS_PNGs/327.png"
+.res
+.skip
+.image "Images/GPS_PNGs/326.png"
+.res
+.skip
+.image "Images/GPS_PNGs/325.png"
+.res
+.skip
+.image "Images/GPS_PNGs/324.png"
+.res
+.skip
+.image "Images/GPS_PNGs/323.png"
+.res
+.skip
+.image "Images/GPS_PNGs/322.png"
+.res
+.skip
+.image "Images/GPS_PNGs/321.png"
+.res
+.skip
+.image "Images/GPS_PNGs/320.png"
+.res
+.skip
+.image "Images/GPS_PNGs/319.png"
+.res
+.skip
+.image "Images/GPS_PNGs/318.png"
+.res
+.skip
+.image "Images/GPS_PNGs/317.png"
+.res
+.skip
+.image "Images/GPS_PNGs/316.png"
+.res
+.skip
+.image "Images/GPS_PNGs/315.png"
+.res
+.skip
+.image "Images/GPS_PNGs/314.png"
+.res
+.skip
+.image "Images/GPS_PNGs/313.png"
+.res
+.skip
+.image "Images/GPS_PNGs/312.png"
+.res
+.skip
+.image "Images/GPS_PNGs/311.png"
+.res
+.skip
+.image "Images/GPS_PNGs/310.png"
+.res
+.skip
+.image "Images/GPS_PNGs/309.png"
+.res
+.skip
+.image "Images/GPS_PNGs/308.png"
+.res
+.skip
+.image "Images/GPS_PNGs/307.png"
+.res
+.skip
+.image "Images/GPS_PNGs/306.png"
+.res
+.skip
+.image "Images/GPS_PNGs/305.png"
+.res
+.skip
+.image "Images/GPS_PNGs/304.png"
+.res
+.skip
+.image "Images/GPS_PNGs/303.png"
+.res
+.skip
+.image "Images/GPS_PNGs/302.png"
+.res
+.skip
+.image "Images/GPS_PNGs/301.png"
+.res
+.skip
+.image "Images/GPS_PNGs/300.png"
+.res
+.skip
+.image "Images/GPS_PNGs/299.png"
+.res
+.skip
+.image "Images/GPS_PNGs/298.png"
+.res
+.skip
+.image "Images/GPS_PNGs/297.png"
+.res
+.skip
+.image "Images/GPS_PNGs/296.png"
+.res
+.skip
+.image "Images/GPS_PNGs/295.png"
+.res
+.skip
+.image "Images/GPS_PNGs/294.png"
+.res
+.skip
+.image "Images/GPS_PNGs/293.png"
+.res
+.skip
+.image "Images/GPS_PNGs/292.png"
+.res
+.skip
+.image "Images/GPS_PNGs/291.png"
+.res
+.skip
+.image "Images/GPS_PNGs/290.png"
+.res
+.skip
+.image "Images/GPS_PNGs/289.png"
+.res
+.skip
+.image "Images/GPS_PNGs/288.png"
+.res
+.skip
+.image "Images/GPS_PNGs/287.png"
+.res
+.skip
+.image "Images/GPS_PNGs/286.png"
+.res
+.skip
+.image "Images/GPS_PNGs/285.png"
+.res
+.skip
+.image "Images/GPS_PNGs/284.png"
+.res
+.skip
+.image "Images/GPS_PNGs/283.png"
+.res
+.skip
+.image "Images/GPS_PNGs/282.png"
+.res
+.skip
+.image "Images/GPS_PNGs/281.png"
+.res
+.skip
+.image "Images/GPS_PNGs/280.png"
+.res
+.skip
+.image "Images/GPS_PNGs/279.png"
+.res
+.skip
+.image "Images/GPS_PNGs/278.png"
+.res
+.skip
+.image "Images/GPS_PNGs/277.png"
+.res
+.skip
+.image "Images/GPS_PNGs/276.png"
+.res
+.skip
+.image "Images/GPS_PNGs/275.png"
+.res
+.skip
+.image "Images/GPS_PNGs/274.png"
+.res
+.skip
+.image "Images/GPS_PNGs/273.png"
+.res
+.skip
+.image "Images/GPS_PNGs/272.png"
+.res
+.skip
+.image "Images/GPS_PNGs/271.png"
+.res
+.skip
+.image "Images/GPS_PNGs/270.png"
+.res
+.skip
+.image "Images/GPS_PNGs/269.png"
+.res
+.skip
+.image "Images/GPS_PNGs/268.png"
+.res
+.skip
+.image "Images/GPS_PNGs/267.png"
+.res
+.skip
+.image "Images/GPS_PNGs/266.png"
+.res
+.skip
+.image "Images/GPS_PNGs/265.png"
+.res
+.skip
+.image "Images/GPS_PNGs/264.png"
+.res
+.skip
+.image "Images/GPS_PNGs/263.png"
+.res
+.skip
+.image "Images/GPS_PNGs/262.png"
+.res
+.skip
+.image "Images/GPS_PNGs/261.png"
+.res
+.skip
+.image "Images/GPS_PNGs/260.png"
+.res
+.skip
+.image "Images/GPS_PNGs/259.png"
+.res
+.skip
+.image "Images/GPS_PNGs/258.png"
+.res
+.skip
+.image "Images/GPS_PNGs/257.png"
+.res
+.skip
+.image "Images/GPS_PNGs/256.png"
+.res
+.skip
+.image "Images/GPS_PNGs/255.png"
+.res
+.skip
+.image "Images/GPS_PNGs/254.png"
+.res
+.skip
+.image "Images/GPS_PNGs/253.png"
+.res
+.skip
+.image "Images/GPS_PNGs/252.png"
+.res
+.skip
+.image "Images/GPS_PNGs/251.png"
+.res
+.skip
+.image "Images/GPS_PNGs/250.png"
+.res
+.skip
+.image "Images/GPS_PNGs/249.png"
+.res
+.skip
+.image "Images/GPS_PNGs/248.png"
+.res
+.skip
+.image "Images/GPS_PNGs/247.png"
+.res
+.skip
+.image "Images/GPS_PNGs/246.png"
+.res
+.skip
+.image "Images/GPS_PNGs/245.png"
+.res
+.skip
+.image "Images/GPS_PNGs/244.png"
+.res
+.skip
+.image "Images/GPS_PNGs/243.png"
+.res
+.skip
+.image "Images/GPS_PNGs/242.png"
+.res
+.skip
+.image "Images/GPS_PNGs/241.png"
+.res
+.skip
+.image "Images/GPS_PNGs/240.png"
+.res
+.skip
+.image "Images/GPS_PNGs/239.png"
+.res
+.skip
+.image "Images/GPS_PNGs/238.png"
+.res
+.skip
+.image "Images/GPS_PNGs/237.png"
+.res
+.skip
+.image "Images/GPS_PNGs/236.png"
+.res
+.skip
+.image "Images/GPS_PNGs/235.png"
+.res
+.skip
+.image "Images/GPS_PNGs/234.png"
+.res
+.skip
+.image "Images/GPS_PNGs/233.png"
+.res
+.skip
+.image "Images/GPS_PNGs/232.png"
+.res
+.skip
+.image "Images/GPS_PNGs/231.png"
+.res
+.skip
+.image "Images/GPS_PNGs/230.png"
+.res
+.skip
+.image "Images/GPS_PNGs/229.png"
+.res
+.skip
+.image "Images/GPS_PNGs/228.png"
+.res
+.skip
+.image "Images/GPS_PNGs/227.png"
+.res
+.skip
+.image "Images/GPS_PNGs/226.png"
+.res
+.skip
+.image "Images/GPS_PNGs/225.png"
+.res
+.skip
+.image "Images/GPS_PNGs/224.png"
+.res
+.skip
+.image "Images/GPS_PNGs/223.png"
+.res
+.skip
+.image "Images/GPS_PNGs/222.png"
+.res
+.skip
+.image "Images/GPS_PNGs/221.png"
+.res
+.skip
+.image "Images/GPS_PNGs/220.png"
+.res
+.skip
+.image "Images/GPS_PNGs/219.png"
+.res
+.skip
+.image "Images/GPS_PNGs/218.png"
+.res
+.skip
+.image "Images/GPS_PNGs/217.png"
+.res
+.skip
+.image "Images/GPS_PNGs/216.png"
+.res
+.skip
+.image "Images/GPS_PNGs/215.png"
+.res
+.skip
+.image "Images/GPS_PNGs/214.png"
+.res
+.skip
+.image "Images/GPS_PNGs/213.png"
+.res
+.skip
+.image "Images/GPS_PNGs/212.png"
+.res
+.skip
+.image "Images/GPS_PNGs/211.png"
+.res
+.skip
+.image "Images/GPS_PNGs/210.png"
+.res
+.skip
+.image "Images/GPS_PNGs/209.png"
+.res
+.skip
+.image "Images/GPS_PNGs/208.png"
+.res
+.skip
+.image "Images/GPS_PNGs/207.png"
+.res
+.skip
+.image "Images/GPS_PNGs/206.png"
+.res
+.skip
+.image "Images/GPS_PNGs/205.png"
+.res
+.skip
+.image "Images/GPS_PNGs/204.png"
+.res
+.skip
+.image "Images/GPS_PNGs/203.png"
+.res
+.skip
+.image "Images/GPS_PNGs/202.png"
+.res
+.skip
+.image "Images/GPS_PNGs/201.png"
+.res
+.skip
+.image "Images/GPS_PNGs/200.png"
+.res
+.skip
+.image "Images/GPS_PNGs/199.png"
+.res
+.skip
+.image "Images/GPS_PNGs/198.png"
+.res
+.skip
+.image "Images/GPS_PNGs/197.png"
+.res
+.skip
+.image "Images/GPS_PNGs/196.png"
+.res
+.skip
+.image "Images/GPS_PNGs/195.png"
+.res
+.skip
+.image "Images/GPS_PNGs/194.png"
+.res
+.skip
+.image "Images/GPS_PNGs/193.png"
+.res
+.skip
+.image "Images/GPS_PNGs/192.png"
+.res
+.skip
+.image "Images/GPS_PNGs/191.png"
+.res
+.skip
+.image "Images/GPS_PNGs/190.png"
+.res
+.skip
+.image "Images/GPS_PNGs/189.png"
+.res
+.skip
+.image "Images/GPS_PNGs/188.png"
+.res
+.skip
+.image "Images/GPS_PNGs/187.png"
+.res
+.skip
+.image "Images/GPS_PNGs/186.png"
+.res
+.skip
+.image "Images/GPS_PNGs/185.png"
+.res
+.skip
+.image "Images/GPS_PNGs/184.png"
+.res
+.skip
+.image "Images/GPS_PNGs/183.png"
+.res
+.skip
+.image "Images/GPS_PNGs/182.png"
+.res
+.skip
+.image "Images/GPS_PNGs/181.png"
+.res
+.skip
+.image "Images/GPS_PNGs/180.png"
+.res
+.skip
+.image "Images/GPS_PNGs/179.png"
+.res
+.skip
+.image "Images/GPS_PNGs/178.png"
+.res
+.skip
+.image "Images/GPS_PNGs/177.png"
+.res
+.skip
+.image "Images/GPS_PNGs/176.png"
+.res
+.skip
+.image "Images/GPS_PNGs/175.png"
+.res
+.skip
+.image "Images/GPS_PNGs/174.png"
+.res
+.skip
+.image "Images/GPS_PNGs/173.png"
+.res
+.skip
+.image "Images/GPS_PNGs/172.png"
+.res
+.skip
+.image "Images/GPS_PNGs/171.png"
+.res
+.skip
+.image "Images/GPS_PNGs/170.png"
+.res
+.skip
+.image "Images/GPS_PNGs/169.png"
+.res
+.skip
+.image "Images/GPS_PNGs/168.png"
+.res
+.skip
+.image "Images/GPS_PNGs/167.png"
+.res
+.skip
+.image "Images/GPS_PNGs/166.png"
+.res
+.skip
+.image "Images/GPS_PNGs/165.png"
+.res
+.skip
+.image "Images/GPS_PNGs/164.png"
+.res
+.skip
+.image "Images/GPS_PNGs/163.png"
+.res
+.skip
+.image "Images/GPS_PNGs/162.png"
+.res
+.skip
+.image "Images/GPS_PNGs/161.png"
+.res
+.skip
+.image "Images/GPS_PNGs/160.png"
+.res
+.skip
+.image "Images/GPS_PNGs/159.png"
+.res
+.skip
+.image "Images/GPS_PNGs/158.png"
+.res
+.skip
+.image "Images/GPS_PNGs/157.png"
+.res
+.skip
+.image "Images/GPS_PNGs/156.png"
+.res
+.skip
+.image "Images/GPS_PNGs/155.png"
+.res
+.skip
+.image "Images/GPS_PNGs/154.png"
+.res
+.skip
+.image "Images/GPS_PNGs/153.png"
+.res
+.skip
+.image "Images/GPS_PNGs/152.png"
+.res
+.skip
+.image "Images/GPS_PNGs/151.png"
+.res
+.skip
+.image "Images/GPS_PNGs/150.png"
+.res
+.skip
+.image "Images/GPS_PNGs/149.png"
+.res
+.skip
+.image "Images/GPS_PNGs/148.png"
+.res
+.skip
+.image "Images/GPS_PNGs/147.png"
+.res
+.skip
+.image "Images/GPS_PNGs/146.png"
+.res
+.skip
+.image "Images/GPS_PNGs/145.png"
+.res
+.skip
+.image "Images/GPS_PNGs/144.png"
+.res
+.skip
+.image "Images/GPS_PNGs/143.png"
+.res
+.skip
+.image "Images/GPS_PNGs/142.png"
+.res
+.skip
+.image "Images/GPS_PNGs/141.png"
+.res
+.skip
+.image "Images/GPS_PNGs/140.png"
+.res
+.skip
+.image "Images/GPS_PNGs/139.png"
+.res
+.skip
+.image "Images/GPS_PNGs/138.png"
+.res
+.skip
+.image "Images/GPS_PNGs/137.png"
+.res
+.skip
+.image "Images/GPS_PNGs/136.png"
+.res
+.skip
+.image "Images/GPS_PNGs/135.png"
+.res
+.skip
+.image "Images/GPS_PNGs/134.png"
+.res
+.skip
+.image "Images/GPS_PNGs/133.png"
+.res
+.skip
+.image "Images/GPS_PNGs/132.png"
+.res
+.skip
+.image "Images/GPS_PNGs/131.png"
+.res
+.skip
+.image "Images/GPS_PNGs/130.png"
+.res
+.skip
+.image "Images/GPS_PNGs/129.png"
+.res
+.skip
+.image "Images/GPS_PNGs/128.png"
+.res
+.skip
+.image "Images/GPS_PNGs/127.png"
+.res
+.skip
+.image "Images/GPS_PNGs/126.png"
+.res
+.skip
+.image "Images/GPS_PNGs/125.png"
+.res
+.skip
+.image "Images/GPS_PNGs/124.png"
+.res
+.skip
+.image "Images/GPS_PNGs/123.png"
+.res
+.skip
+.image "Images/GPS_PNGs/122.png"
+.res
+.skip
+.image "Images/GPS_PNGs/121.png"
+.res
+.skip
+.image "Images/GPS_PNGs/120.png"
+.res
+.skip
+.image "Images/GPS_PNGs/119.png"
+.res
+.skip
+.image "Images/GPS_PNGs/118.png"
+.res
+.skip
+.image "Images/GPS_PNGs/117.png"
+.res
+.skip
+.image "Images/GPS_PNGs/116.png"
+.res
+.skip
+.image "Images/GPS_PNGs/115.png"
+.res
+.skip
+.image "Images/GPS_PNGs/114.png"
+.res
+.skip
+.image "Images/GPS_PNGs/113.png"
+.res
+.skip
+.image "Images/GPS_PNGs/112.png"
+.res
+.skip
+.image "Images/GPS_PNGs/111.png"
+.res
+.skip
+.image "Images/GPS_PNGs/110.png"
+.res
+.skip
+.image "Images/GPS_PNGs/109.png"
+.res
+.skip
+.image "Images/GPS_PNGs/108.png"
+.res
+.skip
+.image "Images/GPS_PNGs/107.png"
+.res
+.skip
+.image "Images/GPS_PNGs/106.png"
+.res
+.skip
+.image "Images/GPS_PNGs/105.png"
+.res
+.skip
+.image "Images/GPS_PNGs/104.png"
+.res
+.skip
+.image "Images/GPS_PNGs/103.png"
+.res
+.skip
+.image "Images/GPS_PNGs/102.png"
+.res
+.skip
+.image "Images/GPS_PNGs/101.png"
+.res
+.skip
+.image "Images/GPS_PNGs/100.png"
+.res
+.skip
+.image "Images/GPS_PNGs/99.png"
+.res
+.skip
+.image "Images/GPS_PNGs/98.png"
+.res
+.skip
+.image "Images/GPS_PNGs/97.png"
+.res
+.skip
+.image "Images/GPS_PNGs/96.png"
+.res
+.skip
+.image "Images/GPS_PNGs/95.png"
+.res
+.skip
+.image "Images/GPS_PNGs/94.png"
+.res
+.skip
+.image "Images/GPS_PNGs/93.png"
+.res
+.skip
+.image "Images/GPS_PNGs/92.png"
+.res
+.skip
+.image "Images/GPS_PNGs/91.png"
+.res
+.skip
+.image "Images/GPS_PNGs/90.png"
+.res
+.skip
+.image "Images/GPS_PNGs/89.png"
+.res
+.skip
+.image "Images/GPS_PNGs/88.png"
+.res
+.skip
+.image "Images/GPS_PNGs/87.png"
+.res
+.skip
+.image "Images/GPS_PNGs/86.png"
+.res
+.skip
+.image "Images/GPS_PNGs/85.png"
+.res
+.skip
+.image "Images/GPS_PNGs/84.png"
+.res
+.skip
+.image "Images/GPS_PNGs/83.png"
+.res
+.skip
+.image "Images/GPS_PNGs/82.png"
+.res
+.skip
+.image "Images/GPS_PNGs/81.png"
+.res
+.skip
+.image "Images/GPS_PNGs/80.png"
+.res
+.skip
+.image "Images/GPS_PNGs/79.png"
+.res
+.skip
+.image "Images/GPS_PNGs/78.png"
+.res
+.skip
+.image "Images/GPS_PNGs/77.png"
+.res
+.skip
+.image "Images/GPS_PNGs/76.png"
+.res
+.skip
+.image "Images/GPS_PNGs/75.png"
+.res
+.skip
+.image "Images/GPS_PNGs/74.png"
+.res
+.skip
+.image "Images/GPS_PNGs/73.png"
+.res
+.skip
+.image "Images/GPS_PNGs/72.png"
+.res
+.skip
+.image "Images/GPS_PNGs/71.png"
+.res
+.skip
+.image "Images/GPS_PNGs/70.png"
+.res
+.skip
+.image "Images/GPS_PNGs/69.png"
+.res
+.skip
+.image "Images/GPS_PNGs/68.png"
+.res
+.skip
+.image "Images/GPS_PNGs/67.png"
+.res
+.skip
+.image "Images/GPS_PNGs/66.png"
+.res
+.skip
+.image "Images/GPS_PNGs/65.png"
+.res
+.skip
+.image "Images/GPS_PNGs/64.png"
+.res
+.skip
+.image "Images/GPS_PNGs/63.png"
+.res
+.skip
+.image "Images/GPS_PNGs/62.png"
+.res
+.skip
+.image "Images/GPS_PNGs/61.png"
+.res
+.skip
+.image "Images/GPS_PNGs/60.png"
+.res
+.skip
+.image "Images/GPS_PNGs/59.png"
+.res
+.skip
+.image "Images/GPS_PNGs/58.png"
+.res
+.skip
+.image "Images/GPS_PNGs/57.png"
+.res
+.skip
+.image "Images/GPS_PNGs/56.png"
+.res
+.skip
+.image "Images/GPS_PNGs/55.png"
+.res
+.skip
+.image "Images/GPS_PNGs/54.png"
+.res
+.skip
+.image "Images/GPS_PNGs/53.png"
+.res
+.skip
+.image "Images/GPS_PNGs/52.png"
+.res
+.skip
+.image "Images/GPS_PNGs/51.png"
+.res
+.skip
+.image "Images/GPS_PNGs/50.png"
+.res
+.skip
+.image "Images/GPS_PNGs/49.png"
+.res
+.skip
+.image "Images/GPS_PNGs/48.png"
+.res
+.skip
+.image "Images/GPS_PNGs/47.png"
+.res
+.skip
+.image "Images/GPS_PNGs/46.png"
+.res
+.skip
+.image "Images/GPS_PNGs/45.png"
+.res
+.skip
+.image "Images/GPS_PNGs/44.png"
+.res
+.skip
+.image "Images/GPS_PNGs/43.png"
+.res
+.skip
+.image "Images/GPS_PNGs/42.png"
+.res
+.skip
+.image "Images/GPS_PNGs/41.png"
+.res
+.skip
+.image "Images/GPS_PNGs/40.png"
+.res
+.skip
+.image "Images/GPS_PNGs/39.png"
+.res
+.skip
+.image "Images/GPS_PNGs/38.png"
+.res
+.skip
+.image "Images/GPS_PNGs/37.png"
+.res
+.skip
+.image "Images/GPS_PNGs/36.png"
+.res
+.skip
+.image "Images/GPS_PNGs/35.png"
+.res
+.skip
+.image "Images/GPS_PNGs/34.png"
+.res
+.skip
+.image "Images/GPS_PNGs/33.png"
+.res
+.skip
+.image "Images/GPS_PNGs/32.png"
+.res
+.skip
+.image "Images/GPS_PNGs/31.png"
+.res
+.skip
+.image "Images/GPS_PNGs/30.png"
+.res
+.skip
+.image "Images/GPS_PNGs/29.png"
+.res
+.skip
+.image "Images/GPS_PNGs/28.png"
+.res
+.skip
+.image "Images/GPS_PNGs/27.png"
+.res
+.skip
+.image "Images/GPS_PNGs/26.png"
+.res
+.skip
+.image "Images/GPS_PNGs/25.png"
+.res
+.skip
+.image "Images/GPS_PNGs/24.png"
+.res
+.skip
+.image "Images/GPS_PNGs/23.png"
+.res
+.skip
+.image "Images/GPS_PNGs/22.png"
+.res
+.skip
+.image "Images/GPS_PNGs/21.png"
+.res
+.skip
+.image "Images/GPS_PNGs/20.png"
+.res
+.skip
+.image "Images/GPS_PNGs/19.png"
+.res
+.skip
+.image "Images/GPS_PNGs/18.png"
+.res
+.skip
+.image "Images/GPS_PNGs/17.png"
+.res
+.skip
+.image "Images/GPS_PNGs/16.png"
+.res
+.skip
+.image "Images/GPS_PNGs/15.png"
+.res
+.skip
+.image "Images/GPS_PNGs/14.png"
+.res
+.skip
+.image "Images/GPS_PNGs/13.png"
+.res
+.skip
+.image "Images/GPS_PNGs/12.png"
+.res
+.skip
+.image "Images/GPS_PNGs/11.png"
+.res
+.skip
+.image "Images/GPS_PNGs/10.png"
+.res
+.skip
+.image "Images/GPS_PNGs/9.png"
+.res
+.skip
+.image "Images/GPS_PNGs/8.png"
+.res
+.skip
+.image "Images/GPS_PNGs/7.png"
+.res
+.skip
+.image "Images/GPS_PNGs/6.png"
+.res
+.skip
+.image "Images/GPS_PNGs/5.png"
+.res
+.skip
+.image "Images/GPS_PNGs/4.png"
+.res
+.skip
+.image "Images/GPS_PNGs/3.png"
+.res
+.skip
+.image "Images/GPS_PNGs/2.png"
+.res END_OF_ANIMATION
+.skip
+.image "Images/GPS_PNGs/1.png"

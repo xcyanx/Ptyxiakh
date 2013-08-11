@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project supports-build-configs="true" version="1.4">
+<build.cfg id="Debug" types="Debug"/>
+<build.cfg id="Release" types="Release"/>
+<criteria>
+<filter type="com.mobilesorcery.sdk.capabilities.devices.elementfactory">
+<capabilities optional="" required="NativeUI"/>
+</filter>
+</criteria>
+<properties>
+<property key="android:package.name" value="com.mosync.app_Magna_Carta"/>
+<property key="build.prefs:additional.include.paths/Debug" value="%mosync-home%/include, /"/>
+<property key="build.prefs:additional.include.paths/Release" value="%mosync-home%/include, /"/>
+<property key="build.prefs:additional.libraries" value="MAUtil.lib,nativeui.lib"/>
+<property key="build.prefs:additional.libraries/Debug" value="mastd.lib, mautil.lib, MAFS.lib, NativeUi.lib, MAP.lib, MAUI.lib, MTXml.lib"/>
+<property key="build.prefs:additional.libraries/Release" value="mastd.lib, mautil.lib, MAFS.lib, NativeUi.lib, MAP.lib, MAUI.lib, MTXml.lib"/>
+<property key="build.prefs:additional.library.paths/Debug" value="%mosync-home%/lib/pipe"/>
+<property key="build.prefs:additional.library.paths/Release" value="%mosync-home%/lib/pipe"/>
+<property key="build.prefs:app.name/Release" value="Magna Carta"/>
+<property key="build.prefs:app.permissions" value="Camera Compass File\ Storage Internet\ Access Internet\ Access/HTTPS Location Location/Coarse Location/Fine Orientation Vibration"/>
+<property key="build.prefs:extra.link.sw/Debug" value=""/>
+<property key="build.prefs:extra.link.sw/Release" value=""/>
+<property key="build.prefs:extra.res.sw/Debug" value=""/>
+<property key="build.prefs:extra.res.sw/Release" value=""/>
+<property key="build.prefs:gcc.switches/Release" value="-O2 -DPLATFORM_%platform-family% -DVARIANT_%platform-variant%"/>
+<property key="build.prefs:gcc.warnings/Debug" value="0"/>
+<property key="build.prefs:gcc.warnings/Release" value="0"/>
+<property key="build.prefs:ignore.default.include.paths/Debug" value="true"/>
+<property key="build.prefs:ignore.default.include.paths/Release" value="true"/>
+<property key="build.prefs:ignore.default.libraries/Debug" value="true"/>
+<property key="build.prefs:ignore.default.libraries/Release" value="true"/>
+<property key="build.prefs:ignore.default.library.paths/Debug" value="true"/>
+<property key="build.prefs:ignore.default.library.paths/Release" value="true"/>
+<property key="build.prefs:memory.data/Debug" value="8192"/>
+<property key="build.prefs:memory.data/Release" value="8192"/>
+<property key="build.prefs:memory.heap/Debug" value="4096"/>
+<property key="build.prefs:memory.heap/Release" value="2048"/>
+<property key="build.prefs:memory.stack/Debug" value="2048"/>
+<property key="build.prefs:memory.stack/Release" value="2048"/>
+<property key="build.prefs:project.type" value=""/>
+<property key="dependency.strategy" value="0"/>
+<property key="excludes/Debug" value=""/>
+<property key="excludes/Release" value=""/>
+<property key="profile.mgr.type" value="0"/>
+<property key="template.id" value="project.nativeuicpp"/>
+<property key="winmobilecs:guid" value="a71a7db0-ba6e-102f-8060-2b1a874f8a6b"/>
+</properties>
+</project>
