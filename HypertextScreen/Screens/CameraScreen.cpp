@@ -210,12 +210,12 @@ void CameraScreen::customEvent(const MAEvent &event)
 	}
 }
 
-void CameraScreen::AddCamListener(CameraListener *listener)
+void CameraScreen::AddCamListener(Cam::CameraListener *listener)
 {
 	NativeUI::addListenerToVector(_Listeners, listener);
 }
 
-void CameraScreen::RemoveCamListener(CameraListener *listener)
+void CameraScreen::RemoveCamListener(Cam::CameraListener *listener)
 {
 	NativeUI::removeListenerFromVector(_Listeners, listener);
 }

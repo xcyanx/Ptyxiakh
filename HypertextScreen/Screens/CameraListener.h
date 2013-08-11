@@ -8,11 +8,15 @@
 #ifndef CAMERALISTENER_H_
 #define CAMERALISTENER_H_
 
+namespace Cam
+{
 
 class CameraListener
 {
 	public:
 		virtual void Notify(int)=0;
+};
+
 };
 
 #endif /* CAMERALISTENER_H_ */

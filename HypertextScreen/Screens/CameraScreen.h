@@ -32,8 +32,8 @@ class CameraScreen: public CustomEventListener
 	    int GetPathname(String &Pathname);
 	    void LaunchCamera();
 	    void LaunchPhoto();
-	    void AddCamListener(CameraListener *listener);
-	    void RemoveCamListener(CameraListener *listener);
+	    void AddCamListener(Cam::CameraListener *listener);
+	    void RemoveCamListener(Cam::CameraListener *listener);
 
 	private:
 		void Photo(MACaptureEventData &data);
@@ -47,7 +47,7 @@ class CameraScreen: public CustomEventListener
 	private:
 		String _pathname;
 		int type;
-		Vector<CameraListener*> _Listeners;
+		Vector<Cam::CameraListener*> _Listeners;
 };
 
 

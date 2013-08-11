@@ -25,7 +25,7 @@ using namespace NativeUI;
 
 
 class HypertextScreen: public StackScreen, public StackScreenListener, public ButtonListener,
-					   public CameraListener
+					   public Cam::CameraListener
 {
 	public:
 		HypertextScreen(Data &data);
