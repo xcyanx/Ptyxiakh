@@ -3,19 +3,22 @@
 <build.cfg id="Debug" types="Debug"/>
 <build.cfg id="Release" types="Release"/>
 <criteria>
+<filter mgr="0" profiles="" require="0" type="com.mobilesorcery.mosync.filters.profile" vendors="Android,BlackBerry,JavaME,Moblin,Symbian,Windows Mobile,Windows Phone,iOS"/>
 <filter type="com.mobilesorcery.sdk.capabilities.devices.elementfactory">
-<capabilities optional="" required="NativeUI"/>
+<capabilities optional="" required="Camera Compass File\ Storage Internet\ Access Location Gyroscope Device\ Fonts NativeUI"/>
 </filter>
 </criteria>
 <properties>
 <property key="android:package.name" value="com.mosync.app_Magna_Carta"/>
+<property key="build.prefs:additional.include.paths" value="%mosync-home%/include"/>
 <property key="build.prefs:additional.include.paths.native/Debug" value="/"/>
 <property key="build.prefs:additional.include.paths.native/Release" value="/"/>
 <property key="build.prefs:additional.include.paths/Debug" value="%mosync-home%/include, /"/>
 <property key="build.prefs:additional.include.paths/Release" value="%mosync-home%/include, /"/>
-<property key="build.prefs:additional.libraries" value="MAUtil.lib,nativeui.lib"/>
+<property key="build.prefs:additional.libraries" value="mastd.lib, MAUtil.lib, nativeui.lib"/>
 <property key="build.prefs:additional.libraries/Debug" value="mastd.lib, mautil.lib, MAFS.lib, NativeUi.lib, MAP.lib, MAUI.lib, MTXml.lib"/>
 <property key="build.prefs:additional.libraries/Release" value="mastd.lib, mautil.lib, MAFS.lib, NativeUi.lib, MAP.lib, MAUI.lib, MTXml.lib"/>
+<property key="build.prefs:additional.library.paths" value="%mosync-home%/lib/pipe"/>
 <property key="build.prefs:additional.library.paths/Debug" value="%mosync-home%/lib/pipe"/>
 <property key="build.prefs:additional.library.paths/Release" value="%mosync-home%/lib/pipe"/>
 <property key="build.prefs:app.name/Release" value="Magna Carta"/>
@@ -27,10 +30,13 @@
 <property key="build.prefs:gcc.switches/Release" value="-O2 -DPLATFORM_%platform-family% -DVARIANT_%platform-variant%"/>
 <property key="build.prefs:gcc.warnings/Debug" value="0"/>
 <property key="build.prefs:gcc.warnings/Release" value="0"/>
+<property key="build.prefs:ignore.default.include.paths" value="true"/>
 <property key="build.prefs:ignore.default.include.paths/Debug" value="true"/>
 <property key="build.prefs:ignore.default.include.paths/Release" value="true"/>
+<property key="build.prefs:ignore.default.libraries" value="true"/>
 <property key="build.prefs:ignore.default.libraries/Debug" value="true"/>
 <property key="build.prefs:ignore.default.libraries/Release" value="true"/>
+<property key="build.prefs:ignore.default.library.paths" value="true"/>
 <property key="build.prefs:ignore.default.library.paths/Debug" value="true"/>
 <property key="build.prefs:ignore.default.library.paths/Release" value="true"/>
 <property key="build.prefs:memory.data/Debug" value="8192"/>
