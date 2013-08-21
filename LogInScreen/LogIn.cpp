@@ -12,7 +12,7 @@
 
 #define LOG lprintfln
 
-LogIn::LogIn(MainScreen *obj):Screen(), mConnection(this)
+LogIn::LogIn(MainScreen *obj):Screen(), mConnection(this), optionWrite(-1)
 {
 	_Layout = new NativeUI::VerticalLayout();
 
@@ -54,6 +54,16 @@ LogIn::LogIn(MainScreen *obj):Screen(), mConnection(this)
 	_Layout->addChild(_Button);
 	_Button->addButtonListener(this);
 
+	_Button2 = new NativeUI::Button();
+
+	_Button2->fillSpaceHorizontally();
+	_Button2->wrapContentVertically();
+	_Button2->setTextHorizontalAlignment(MAW_ALIGNMENT_CENTER);
+	_Button2->setTextVerticalAlignment(MAW_ALIGNMENT_CENTER);
+	_Button2->setText("Create account");
+	_Layout->addChild(_Button2);
+	_Button2->addButtonListener(this);
+
 	this->obj = obj;
 }
 
@@ -81,7 +91,7 @@ void LogIn::connectFinished (Connection *conn, int result)
 
 	packet = new LogInPacket();
 
-	packet->PacketID = BasicPacket::ACC_VERIFICATION;
+	packet->PacketID = optionWrite;
 	strcpy(((LogInPacket*)packet)->username, _Username->getText().c_str());
 	strcpy(((LogInPacket*)packet)->password, _Password->getText().c_str());
 
@@ -115,17 +125,18 @@ void LogIn::connReadFinished(Connection *conn, int result)
 
 	mConnection.close();
 
-	_Button->setEnabled(true);
+	//_Button->setEnabled(true);
 
-	if(packet->PacketID != BasicPacket::ACC_VERIFIED)
+	if(packet->PacketID == BasicPacket::ACC_NOTVERIFIED)
 	{
 		maAlert("Magna Carta", "Invalid username or password.", "Ok", NULL, NULL);
 
 		delete packet;
 
 		_Button->setEnabled(true);
+		_Button2->setEnabled(true);
 	}
-	else
+	else if(packet->PacketID == BasicPacket::ACC_VERIFIED)
 	{
 		LOG("Guid1: %ul", packet->guid.Data1);
 		LOG("Guid2: %hu", packet->guid.Data2);
@@ -135,6 +146,24 @@ void LogIn::connReadFinished(Connection *conn, int result)
 		delete packet;
 
 		obj->pop();
+	}
+	else if(packet->PacketID == BasicPacket::ACC_NOTAVAILABLE)
+	{
+		maAlert("Magna Carta", "Username already exists.", "Ok", NULL, NULL);
+
+		delete packet;
+
+		_Button->setEnabled(true);
+		_Button2->setEnabled(true);
+	}
+	else if(packet->PacketID == BasicPacket::ACC_CREATED)
+	{
+		maAlert("Magna Carta", "Account created. Now login.", "Ok", NULL, NULL);
+
+		delete packet;
+
+		_Button->setEnabled(true);
+		_Button2->setEnabled(false);
 	}
 
 
@@ -150,6 +179,7 @@ void LogIn::connWriteFinished(Connection *conn, int result)
 		mConnection.close();
 
 		_Button->setEnabled(true);
+		_Button2->setEnabled(true);
 
 		delete packet;
 
@@ -171,14 +201,22 @@ void LogIn::buttonClicked(NativeUI::Widget *button)
 	//obj->pop();
 	//Authenticate the user.
 
-	button->setEnabled(false);
 
 	/*if(mConnection.isOpen())
 	{
 		return;
 	}*/
+	if(button == _Button)
+		optionWrite = BasicPacket::ACC_VERIFICATION;
+	else
+		optionWrite = BasicPacket::ACC_CREATE;
 
-	mConnection.connect("socket://46.177.45.100:3014");
+	_Button->setEnabled(false);
+	_Button2->setEnabled(false);
+
+
+	mConnection.connect("socket://79.167.90.214:3014");
+
 }
 
 void LogIn::editBoxReturn(NativeUI::EditBox *editBox)

@@ -25,6 +25,9 @@ struct BasicPacket
 		ACC_VERIFICATION = 0x0,
 		ACC_VERIFIED,
 		ACC_NOTVERIFIED,
+		ACC_CREATE,
+		ACC_NOTAVAILABLE,
+		ACC_CREATED,
 		DATA_REQUESTROUTES,
 		DATA_PACKETSIZE,
 		DATA_XMLDATA,
@@ -54,7 +57,7 @@ struct NextPacketSize: public BasicPacket
 
 struct XMLPacket: public BasicPacket
 {
-	char xmlData[1];
+	char xmlData[0];
 };
 
 struct LogInPacket: public BasicPacket

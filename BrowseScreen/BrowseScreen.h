@@ -116,6 +116,8 @@ class Option:  public MAUI::Screen , public GPSListener, public NativeUI::EditBo
 		bool tracking;
 		MAP::LonLat _Point;
 		int index;
+		short writeOption;
+		PoI *_PoI;
 		//bool operatable;
 };
 

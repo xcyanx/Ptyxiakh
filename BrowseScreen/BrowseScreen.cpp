@@ -11,12 +11,13 @@
 #include "../MainScreen.h"
 #include <mavsprintf.h>
 
-#define BASEURL "http://something.com/"
+#define URL "socket://79.167.90.214:3015"
+#define BASEURL "http://www.example.com"
 
 #define LOG(words) lprintfln(words)
 
 Option::Option(MainScreen *scr):Screen(), visible(false), _MScr(scr), DoubleClickTimeMs(200),
-								pointerPressTimeMs(-1)
+								pointerPressTimeMs(-1), writeOption(-1)
 {
 
 	MAExtent tSize = maGetScrSize();
@@ -87,7 +88,8 @@ Option::Option(MainScreen *scr):Screen(), visible(false), _MScr(scr), DoubleClic
     //operatable = false;
 
     mConnection = new MAUtil::Connection(this);
-    mConnection->connect("socket://79.167.49.204:3015");
+
+    //mConnection->connect("socket://46.177.24.169:3015");
 
     _XMLParser = new XML2Parser();
     _XMLParser1 = new XMLParser();
@@ -109,9 +111,15 @@ Option::Option(MainScreen *scr):Screen(), visible(false), _MScr(scr), DoubleClic
 void Option::itemSelected(PopUp* obj, int index)
 {
 	//_RouteList popup handler.
+
+	lprintfln("Caller: %u", obj->getCaller());
+	lprintfln("Index: %d", index);
+
 	if(obj->getCaller() == NULL)
 	{
 		loc_data.clear();
+
+		lprintfln("We are in Route popup.");
 
 		if(index == 0)
 		{
@@ -119,6 +127,8 @@ void Option::itemSelected(PopUp* obj, int index)
 
 			return;
 		}
+
+		lprintfln("And we are requesting the route data.");
 
 		tracking = false;
 
@@ -133,51 +143,65 @@ void Option::itemSelected(PopUp* obj, int index)
 
 		strcpy(((RRouteData*)packet)->route_name, temp.c_str());
 
-		mConnection->write(packet, sizeof(RRouteData));
 
+		//mConnection->write(packet, sizeof(RRouteData));
+
+		writeOption = BasicPacket::DATA_REQUESTROUTEDATA;
+
+		mConnection->close();
+		mConnection->connect(URL);
 
 		//mConnection->write(packet, sizeof(NextPacketSize));
 
 	}
 	else
 	{
-		PoI *tempPoI = (PoI*)obj->getCaller();
+		_PoI = (PoI*)obj->getCaller();
 
 		switch(index)
 		{
 			case 0:
 				//_MScr->callPreviewScreen(PreviewScreen::VideoScr);
-				packet = new VideoReqPacket();
+				//packet = new VideoReqPacket();
 
-				((VideoReqPacket*)packet)->PacketID = BasicPacket::DATA_VIDEO_URLREQ;
-				((VideoReqPacket*)packet)->videoID = tempPoI->getVidID();
+				//((VideoReqPacket*)packet)->PacketID = BasicPacket::DATA_VIDEO_URLREQ;
+				//((VideoReqPacket*)packet)->videoID = tempPoI->getVidID();
 
-				mConnection->write(packet, sizeof(VideoReqPacket));
+				writeOption = BasicPacket::DATA_VIDEO_URLREQ;
+
+				//mConnection->write(packet, sizeof(VideoReqPacket));
 
 				break;
 			case 1:
 				//_MScr->callPreviewScreen(PreviewScreen::ImageScr);
-				packet = new VideoReqPacket();
+				//packet = new VideoReqPacket();
 
-				((VideoReqPacket*)packet)->PacketID = BasicPacket::DATA_IMG_URLREQ;
-				((VideoReqPacket*)packet)->videoID = tempPoI->getImgID();
+				//((VideoReqPacket*)packet)->PacketID = BasicPacket::DATA_IMG_URLREQ;
+				//((VideoReqPacket*)packet)->videoID = tempPoI->getImgID();
 
-				mConnection->write(packet, sizeof(VideoReqPacket));
+				writeOption = BasicPacket::DATA_IMG_URLREQ;
+
+				//mConnection->write(packet, sizeof(VideoReqPacket));
 
 				break;
 			case 2:
 				//_MScr->callPreviewScreen(PreviewScreen::TextScr);
-				packet = new VideoReqPacket();
+				//packet = new VideoReqPacket();
 
-				((VideoReqPacket*)packet)->PacketID = BasicPacket::DATA_TEXT_REQ;
-				((VideoReqPacket*)packet)->videoID = tempPoI->getTxtID();
+				//((VideoReqPacket*)packet)->PacketID = BasicPacket::DATA_TEXT_REQ;
+				//((VideoReqPacket*)packet)->videoID = tempPoI->getTxtID();
 
-				mConnection->write(packet, sizeof(VideoReqPacket));
+				writeOption = BasicPacket::DATA_TEXT_REQ;
+
+				//mConnection->write(packet, sizeof(VideoReqPacket));
 
 				break;
 			default:
 				break;
 		}
+
+		mConnection->close();
+		mConnection->connect(URL);
 	}
 }
 
@@ -188,11 +212,16 @@ void Option::buttonPressed(MAUI::Button *object)
 
 	object->setEnabled(false);
 
-	packet = new BasicPacket();
+	//packet = new BasicPacket();
 
-	packet->PacketID = BasicPacket::DATA_REQUESTROUTES;
+	//packet->PacketID = BasicPacket::DATA_REQUESTROUTES;
 
-	mConnection->write(packet, sizeof(BasicPacket));
+	//mConnection->write(packet, sizeof(BasicPacket));
+
+	writeOption = BasicPacket::DATA_REQUESTROUTES;
+
+	mConnection->close();
+	mConnection->connect(URL);
 }
 
 void Option::show()
@@ -207,7 +236,8 @@ void Option::show()
 	Option::Screen::show();
 	maWidgetScreenShow(0);
 
-	_Button->setEnabled(connected);
+	//_Button->setEnabled(connected);
+	_Button->setEnabled(true);
 }
 
 void Option::hide()
@@ -405,11 +435,99 @@ void Option::connectFinished (Connection *conn, int result)
 	if(result <= 0)
 	{
 		maAlert("Magna Carta", "Connection: Could not connect to server.", "Ok", NULL, NULL);
+
+		_Button->setEnabled(true);
 	}
 	else
 	{
 		connected = true;
 		//operatable = true;
+	}
+
+	switch(writeOption)
+	{
+		case BasicPacket::DATA_REQUESTROUTES:
+		{
+
+			if(packet != NULL)
+			{
+				delete packet;
+
+				packet = NULL;
+			}
+
+			packet = new BasicPacket();
+
+			packet->PacketID = BasicPacket::DATA_REQUESTROUTES;
+
+			mConnection->write(packet, sizeof(BasicPacket));
+
+			break;
+		}
+		case BasicPacket::DATA_REQUESTROUTEDATA:
+		{
+			lprintfln("DATA_REQUESTROUTEDATA on Connect Finished(packetid : %d)", packet->PacketID);
+
+			mConnection->write(packet, sizeof(RRouteData));
+
+			//mConnection->write(packet, sizeof(NextPacketSize));
+
+			break;
+		}
+		case BasicPacket::DATA_VIDEO_URLREQ:
+		{
+			if(packet != NULL)
+			{
+				delete packet;
+
+				packet = NULL;
+			}
+
+			packet = new VideoReqPacket();
+
+			((VideoReqPacket*)packet)->PacketID = BasicPacket::DATA_VIDEO_URLREQ;
+			((VideoReqPacket*)packet)->videoID = _PoI->getVidID();
+
+			mConnection->write(packet, sizeof(VideoReqPacket));
+
+			break;
+		}
+		case BasicPacket::DATA_IMG_URLREQ:
+		{
+			if(packet != NULL)
+			{
+				delete packet;
+
+				packet = NULL;
+			}
+
+			packet = new VideoReqPacket();
+
+			((VideoReqPacket*)packet)->PacketID = BasicPacket::DATA_IMG_URLREQ;
+			((VideoReqPacket*)packet)->videoID = _PoI->getImgID();
+
+			mConnection->write(packet, sizeof(VideoReqPacket));
+
+			break;
+		}
+		case BasicPacket::DATA_TEXT_REQ:
+		{
+			if(packet != NULL)
+			{
+				delete packet;
+
+				packet = NULL;
+			}
+
+			packet = new VideoReqPacket();
+
+			((VideoReqPacket*)packet)->PacketID = BasicPacket::DATA_TEXT_REQ;
+			((VideoReqPacket*)packet)->videoID = _PoI->getTxtID();
+
+			mConnection->write(packet, sizeof(VideoReqPacket));
+
+			break;
+		}
 	}
 }
 
@@ -422,87 +540,147 @@ void Option::connReadFinished(Connection *conn, int result)
 	int sizeY = EXTENT_Y(tSize);
 
 
+	lprintfln("Packet code: %d", packet->PacketID);
+	lprintfln("Result: %d", result);
+
+	/*if(result < 0)
+	{
+		maAlert("Magna Carta", "Connection: Write failed. Try again.", "Ok", NULL, NULL);
+
+		mConnection->close();
+
+		_Button->setEnabled(true);
+
+		delete packet;
+
+		return;
+	}*/
 
 	if(packet->PacketID == BasicPacket::DATA_PACKETSIZE)
-	{
-		BasicPacket *temp = packet;
-		unsigned int packetSize;
+		{
+			BasicPacket *temp = packet;
+			unsigned int packetSize;
 
-		packetSize = sizeof(XMLPacket)+((NextPacketSize*)packet)->size-1;
+			packetSize = sizeof(XMLPacket)+((NextPacketSize*)packet)->size;//-1;
 
-		packet = (XMLPacket*)malloc(packetSize);
+			packet = (XMLPacket*)malloc(packetSize);
 
-		delete temp;
+			lprintfln("Packet size is: %u", packetSize);
 
-		mConnection->read(packet, packetSize);
-	}
-	else if(packet->PacketID == BasicPacket::DATA_XMLDATA)
-	{
-		_RouteList->clear();
+			delete temp;
 
-		_RouteList->addOption("Current route.");
+			mConnection->read(packet, packetSize);
+		}
+		else if(packet->PacketID == BasicPacket::DATA_XMLDATA)
+		{
+			_Button->setEnabled(true);
 
-		//parse it with the xml parser.
-		_XMLParser->parse(((XMLPacket*)packet)->xmlData);
+			_RouteList->clear();
 
-		delete packet;
+			_RouteList->addOption("Current route.");
 
-		_RouteList->setHeight((int)(0.9*sizeY));
-		_RouteList->setWidth(sizeX);
-		_RouteList->show(0, 0);
-	}
-	else if(packet->PacketID == BasicPacket::DATA_ROUTEDATA)
-	{
-		_XMLParser1->parse(((XMLPacket*)packet)->xmlData);
+			//parse it with the xml parser.
+			_XMLParser->parse(((XMLPacket*)packet)->xmlData);
 
-		delete packet;
-	}
-	else if(packet->PacketID == BasicPacket::DATA_VIDEO_URLRES)
-	{
-		MAUtil::String url;
+			if(packet != NULL)
+			{
+				delete packet;
 
-		url = BASEURL;
-		url += ((VideoResPacket*)packet)->url;
+				packet = NULL;
+			}
 
-		((PreviewScreen*)_MScr->getPreviewScreen())->setVideoData(url);
-		_MScr->callPreviewScreen(PreviewScreen::VideoScr);
-	}
-	else if(packet->PacketID == BasicPacket::DATA_IMG_URLRES)
-	{
-		MAUtil::String url;
+			_RouteList->setHeight((int)(0.9*sizeY));
+			_RouteList->setWidth(sizeX);
+			_RouteList->show(0, 0);
+		}
+		else if(packet->PacketID == BasicPacket::DATA_ROUTEDATA)
+		{
+			_XMLParser1->parse(((XMLPacket*)packet)->xmlData);
 
-		url = BASEURL;
-		url += ((VideoResPacket*)packet)->url;
+			if(packet != NULL)
+			{
+				delete packet;
 
-		placeholder = maCreatePlaceholder();
+				packet = NULL;
+			}
+		}
+		else if(packet->PacketID == BasicPacket::DATA_VIDEO_URLRES)
+		{
+			MAUtil::String url;
 
-		_Downloader.beginDownloading(url.c_str(), placeholder);
-	}
-	else if(packet->PacketID == BasicPacket::DATA_TEXT_RES)
-	{
-		MAUtil::String txt;
+			url = BASEURL;
+			url += ((VideoResPacket*)packet)->url;
 
-		txt = ((TextResPacket*)packet)->text;
+			((PreviewScreen*)_MScr->getPreviewScreen())->setVideoData(url);
+			_MScr->callPreviewScreen(PreviewScreen::VideoScr);
+		}
+		else if(packet->PacketID == BasicPacket::DATA_IMG_URLRES)
+		{
+			MAUtil::String url;
 
-		((PreviewScreen*)_MScr->getPreviewScreen())->setTxtData(txt);
-		_MScr->callPreviewScreen(PreviewScreen::TextScr);
-	}
+			url = BASEURL;
+			url += ((VideoResPacket*)packet)->url;
+
+			if(packet != NULL)
+			{
+				delete packet;
+
+				packet = NULL;
+			}
+
+			placeholder = maCreatePlaceholder();
+
+			_Downloader.beginDownloading(url.c_str(), placeholder);
+		}
+		else if(packet->PacketID == BasicPacket::DATA_TEXT_RES)
+		{
+			MAUtil::String txt;
+
+			txt = ((TextResPacket*)packet)->text;
+
+			if(packet != NULL)
+			{
+				delete packet;
+
+				packet = NULL;
+			}
+
+			((PreviewScreen*)_MScr->getPreviewScreen())->setTxtData(txt);
+			_MScr->callPreviewScreen(PreviewScreen::TextScr);
+		}
 }
 
 void Option::connWriteFinished(Connection *conn, int result)
 {
-	if(result < 0)
+	/*if(result < 0)
 	{
 		maAlert("Magna Carta", "Connection: Write failed. Try again.", "Ok", NULL, NULL);
-	}
 
-	_Button->setEnabled(true);
+		mConnection->close();
+
+		_Button->setEnabled(true);
+
+		delete packet;
+
+		return;
+	}*/
+
+	lprintfln("Result: %d", result);
+
+	//_Button->setEnabled(true);
 
 	if(packet->PacketID == BasicPacket::DATA_REQUESTROUTES)
 	{
-		delete packet;
+		if(packet != NULL)
+		{
+			delete packet;
+
+			packet = NULL;
+		}
 
 		packet = new NextPacketSize();
+
+		lprintfln("Reading next packet size");
 
 		mConnection->read(packet, sizeof(NextPacketSize));
 	}
@@ -512,7 +690,12 @@ void Option::connWriteFinished(Connection *conn, int result)
 	}
 	else if(packet->PacketID == BasicPacket::DATA_REQUESTROUTEDATA)
 	{
-		delete packet;
+		if(packet != NULL)
+		{
+			delete packet;
+
+			packet = NULL;
+		}
 
 		packet = new NextPacketSize();
 
@@ -522,7 +705,12 @@ void Option::connWriteFinished(Connection *conn, int result)
 	}
 	else if(packet->PacketID == BasicPacket::DATA_VIDEO_URLREQ || packet->PacketID == BasicPacket::DATA_IMG_URLREQ)
 	{
-		delete packet;
+		if(packet != NULL)
+		{
+			delete packet;
+
+			packet = NULL;
+		}
 
 		packet = new VideoResPacket();
 
@@ -532,7 +720,12 @@ void Option::connWriteFinished(Connection *conn, int result)
 	}
 	else if(packet->PacketID == BasicPacket::DATA_TEXT_REQ)
 	{
-		delete packet;
+		if(packet != NULL)
+		{
+			delete packet;
+
+			packet = NULL;
+		}
 
 		packet = new NextPacketSize();
 

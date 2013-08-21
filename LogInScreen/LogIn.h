@@ -41,12 +41,14 @@ class LogIn: public NativeUI::Screen, private NativeUI::ButtonListener,
 		NativeUI::EditBox *_Username;
 		NativeUI::EditBox *_Password;
 		NativeUI::Button  *_Button;
+		NativeUI::Button *_Button2;
 		Connection 		  mConnection;
 		MainScreen 	      *obj;
 		NativeUI::VerticalLayout *_Layout;
 		BasicPacket       *packet;
 		int 			  result;
 		//char 			  linebuffer[1024];
+		short optionWrite;
 };
 
 #endif /* LOGIN_H_ */
