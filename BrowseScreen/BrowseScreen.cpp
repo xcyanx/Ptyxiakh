@@ -115,9 +115,11 @@ void Option::itemSelected(PopUp* obj, int index)
 	lprintfln("Caller: %u", obj->getCaller());
 	lprintfln("Index: %d", index);
 
-	if(obj->getCaller() == NULL)
+	if(obj == _RouteList)//if(obj->getCaller() == NULL)
 	{
 		loc_data.clear();
+
+		obj->hide();
 
 		lprintfln("We are in Route popup.");
 
@@ -131,8 +133,6 @@ void Option::itemSelected(PopUp* obj, int index)
 		lprintfln("And we are requesting the route data.");
 
 		tracking = false;
-
-		obj->hide();
 
 		packet = new RRouteData();
 
@@ -468,6 +468,8 @@ void Option::connectFinished (Connection *conn, int result)
 		{
 			lprintfln("DATA_REQUESTROUTEDATA on Connect Finished(packetid : %d)", packet->PacketID);
 
+			_RouteIDs.clear();
+
 			mConnection->write(packet, sizeof(RRouteData));
 
 			//mConnection->write(packet, sizeof(NextPacketSize));
@@ -589,9 +591,9 @@ void Option::connReadFinished(Connection *conn, int result)
 				packet = NULL;
 			}
 
-			_RouteList->setHeight((int)(0.9*sizeY));
-			_RouteList->setWidth(sizeX);
-			_RouteList->show(0, 0);
+			//_RouteList->setHeight((int)(0.9*sizeY));
+			//_RouteList->setWidth(sizeX);
+			//_RouteList->show(0, 0);
 		}
 		else if(packet->PacketID == BasicPacket::DATA_ROUTEDATA)
 		{
@@ -777,10 +779,23 @@ void Option::XMLParsed(XMLBase *obj)
 
 void Option::XMLData(XMLBase *obj, MAUtil::String &Data)
 {
+	static int counter = 0;
+
 	if(obj == _XMLParser)
 	{
 		lprintfln("Found string in xml: %s\n", Data.c_str());
-		_RouteList->addOption(Data);
+
+		if(counter % 2 == 0)
+			_RouteList->addOption(Data);
+		else
+		{
+			if(isdigit(Data.c_str()[0]))
+				_RouteIDs.add(atoi(Data.c_str()));
+
+			counter = 0;
+		}
+
+		counter++;
 	}
 	else if(obj == _XMLParser1)
 	{

@@ -23,6 +23,8 @@
 #include <MAUI/EditBox.h>
 #include <MAUtil/Connection.h>
 #include <MAUtil/Downloader.h>
+#include <mactype.h>
+#include <mastdlib.h>
 
 #include "../GPS/GPSListener.h"
 #include "LineLayer.h"
@@ -118,6 +120,7 @@ class Option:  public MAUI::Screen , public GPSListener, public NativeUI::EditBo
 		int index;
 		short writeOption;
 		PoI *_PoI;
+		MAUtil::Vector<int> _RouteIDs;
 		//bool operatable;
 };
 
