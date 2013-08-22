@@ -10,14 +10,6 @@
 
 #define MAX_BUFFER_LEN 2048
 
-struct GUID
-{
-    unsigned long  Data1;
-    unsigned short Data2;
-    unsigned short Data3;
-	unsigned char  Data4[8];
-};
-
 struct BasicPacket
 {
 	enum PacketIDs
@@ -42,7 +34,6 @@ struct BasicPacket
 	};
 
 	int PacketID;
-	GUID guid;
 };
 
 struct RRouteData: public BasicPacket

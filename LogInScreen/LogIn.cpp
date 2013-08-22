@@ -138,10 +138,10 @@ void LogIn::connReadFinished(Connection *conn, int result)
 	}
 	else if(packet->PacketID == BasicPacket::ACC_VERIFIED)
 	{
-		LOG("Guid1: %ul", packet->guid.Data1);
-		LOG("Guid2: %hu", packet->guid.Data2);
-		LOG("Guid3: %hu", packet->guid.Data3);
-		LOG("Guid4: %u", packet->guid.Data4);
+		//LOG("Guid1: %ul", packet->guid.Data1);
+		//LOG("Guid2: %hu", packet->guid.Data2);
+		//LOG("Guid3: %hu", packet->guid.Data3);
+		//LOG("Guid4: %u", packet->guid.Data4);
 
 		delete packet;
 

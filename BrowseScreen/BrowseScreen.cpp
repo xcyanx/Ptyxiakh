@@ -910,4 +910,11 @@ Option::~Option()
 	delete _Font;
 	delete _PopUp;
 	delete mConnection;
+
+	if(packet != NULL)
+	{
+		delete packet;
+
+		packet = NULL;
+	}
 }
