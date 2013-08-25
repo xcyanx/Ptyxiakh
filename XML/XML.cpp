@@ -77,6 +77,15 @@ MAUtil::String XML::getLocalPath()
 	    return path;
 }
 
+int XML::getSize()
+{
+	return maFileSize(XML::file);
+}
+
+MAHandle XML::getHandle()
+{
+	return XML::file;
+}
 
 XML::XML(MAUtil::String filename)
 {
@@ -164,6 +173,11 @@ bool XML::writeDataToXML(MAUtil::String filename)
 int XML::getRemaining(MAHandle file)
 {
 	return maFileSize(file) - maFileTell(file);
+}
+
+void XML::finalize()
+{
+	this->CloseRoot();
 }
 
 void XML::WriteNode(Data data)

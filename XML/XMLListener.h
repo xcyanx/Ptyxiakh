@@ -18,6 +18,7 @@ class XMLListener
 		virtual void XMLParsed(XMLBase *obj)=0;
 		virtual void XMLLocData(XMLBase *obj, LocData &Data) { };
 		virtual void XMLData(XMLBase *obj, MAUtil::String &Data){ };
+		virtual void XMLAttr(XMLBase *obj, MAUtil::String &Data){ };
 };
 
 

@@ -11,7 +11,7 @@
 #include "../MainScreen.h"
 #include <mavsprintf.h>
 
-#define URL "socket://79.167.90.214:3015"
+#define URL "socket://79.167.189.40:3015"
 #define BASEURL "http://www.example.com"
 
 #define LOG(words) lprintfln(words)
@@ -117,8 +117,6 @@ void Option::itemSelected(PopUp* obj, int index)
 
 	if(obj == _RouteList)//if(obj->getCaller() == NULL)
 	{
-		loc_data.clear();
-
 		obj->hide();
 
 		lprintfln("We are in Route popup.");
@@ -130,9 +128,11 @@ void Option::itemSelected(PopUp* obj, int index)
 			return;
 		}
 
-		lprintfln("And we are requesting the route data.");
-
 		tracking = false;
+
+		loc_data.clear();
+
+		lprintfln("And we are requesting the route data.");
 
 		packet = new RRouteData();
 
@@ -468,7 +468,7 @@ void Option::connectFinished (Connection *conn, int result)
 		{
 			lprintfln("DATA_REQUESTROUTEDATA on Connect Finished(packetid : %d)", packet->PacketID);
 
-			_RouteIDs.clear();
+			//_RouteIDs.clear();
 
 			mConnection->write(packet, sizeof(RRouteData));
 
@@ -579,10 +579,15 @@ void Option::connReadFinished(Connection *conn, int result)
 
 			_RouteList->clear();
 
+			_RouteIDs.clear();
+
+			_RouteIDs.add(-1);
 			_RouteList->addOption("Current route.");
 
 			//parse it with the xml parser.
 			_XMLParser->parse(((XMLPacket*)packet)->xmlData);
+
+			lprintfln("Route list xml %s", ((XMLPacket*)packet)->xmlData);
 
 			if(packet != NULL)
 			{
@@ -743,6 +748,7 @@ void Option::XMLParsed(XMLBase *obj)
 
 		int sizeX = EXTENT_X(tSize);
 		int sizeY = EXTENT_Y(tSize);
+
 		_RouteList->setHeight((int)(0.9*sizeY));
 		_RouteList->setWidth(sizeX);
 		_RouteList->show(0, 0);
@@ -779,28 +785,23 @@ void Option::XMLParsed(XMLBase *obj)
 
 void Option::XMLData(XMLBase *obj, MAUtil::String &Data)
 {
-	static int counter = 0;
-
 	if(obj == _XMLParser)
 	{
 		lprintfln("Found string in xml: %s\n", Data.c_str());
 
-		if(counter % 2 == 0)
-			_RouteList->addOption(Data);
-		else
-		{
-			if(isdigit(Data.c_str()[0]))
-				_RouteIDs.add(atoi(Data.c_str()));
-
-			counter = 0;
-		}
-
-		counter++;
+		_RouteList->addOption(Data);
 	}
 	else if(obj == _XMLParser1)
 	{
 		lprintfln("Found string in xml: %s\n", Data.c_str());
 	}
+}
+
+void Option::XMLAttr(XMLBase *obj, MAUtil::String &Data)
+{
+	lprintfln("Found attribute in xml: %s", Data.c_str());
+
+	_RouteIDs.add(atoi(Data.c_str()));
 }
 
 bool Option::outOfMemory(MAUtil::Downloader *downloader)

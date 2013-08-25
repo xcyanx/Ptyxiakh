@@ -98,6 +98,17 @@ void XML2Parser::mtxTagEnd(const char* name, int len)
 	}
 }
 
+void XML2Parser::mtxTagAttr(const char* tagAttr, const char* something)
+{
+	MAUtil::String tmp(something);
+
+	if(!strcmp(tagAttr, "RID"))
+		for(int i = 0; i < _Listeners.size(); i++)
+		{
+			_Listeners[i]->XMLAttr(this, tmp);
+		}
+}
+
 void XML2Parser::mtxParseError(int error)
 {
 	maPanic(0, "Error in xml.");

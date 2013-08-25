@@ -39,7 +39,7 @@ class XML2Parser: public XmlListener, public MtxListener, public XMLBase
 	  void mtxEncoding(const char* encoding){ };
 	  void mtxTagStartEnd(){ };
 	  void mtxEmptyTagEnd(){ };
-	  void mtxTagAttr(const char* tagAttr, const char* something) { };
+	  void mtxTagAttr(const char* tagAttr, const char* something);
 	  //const MAUtil::Vector<LocData> getArray();
 	  //unsigned char mtxUnicodeCharacter(int unicode);
 
@@ -47,7 +47,8 @@ class XML2Parser: public XmlListener, public MtxListener, public XMLBase
 	  enum XmlTags
 	  	{
 		  ROUTES,
-		  NAME
+		  NAME,
+		  RID
 	  	};
 
 	  	MAUtil::Stack<XmlTags> mState;

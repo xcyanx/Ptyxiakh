@@ -9,7 +9,9 @@
 #include "LogIn.h"
 #include "../MainScreen.h"
 #include <mavsprintf.h>
+#include "../MD5/MD5.h"
 
+#define URL "socket://79.167.189.40:3014"
 #define LOG lprintfln
 
 LogIn::LogIn(MainScreen *obj):Screen(), mConnection(this), optionWrite(-1)
@@ -94,7 +96,11 @@ void LogIn::connectFinished (Connection *conn, int result)
 
 	packet->PacketID = optionWrite;
 	strcpy(((LogInPacket*)packet)->username, _Username->getText().c_str());
-	strcpy(((LogInPacket*)packet)->password, _Password->getText().c_str());
+
+	LOG("MD5 of passwowrd: %s", md5(_Password->getText()).c_str());
+	LOG("MD5 len: %d", strlen(md5(_Password->getText()).c_str()));
+
+	strcpy(((LogInPacket*)packet)->password, md5(_Password->getText()).c_str());
 
 	LOG("username->%s\n", ((LogInPacket*)packet)->username);
 	LOG("password->%s\n", ((LogInPacket*)packet)->password);
@@ -226,7 +232,7 @@ void LogIn::buttonClicked(NativeUI::Widget *button)
 	_Button2->setEnabled(false);
 
 
-	mConnection.connect("socket://79.167.90.214:3014");
+	mConnection.connect(URL);
 
 }
 

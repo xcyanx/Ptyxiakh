@@ -83,6 +83,7 @@ class Option:  public MAUI::Screen , public GPSListener, public NativeUI::EditBo
 		void connReadFinished(MAUtil::Connection *conn, int result);
 		void XMLParsed(XMLBase *obj);
 		void XMLData(XMLBase *obj, MAUtil::String &Data);
+		void XMLAttr(XMLBase *obj, MAUtil::String &Data);
 		bool outOfMemory(MAUtil::Downloader *downloader);
 		void finishedDownloading(MAUtil::Downloader *downloader, MAHandle data);
 		void downloadCancelled(MAUtil::Downloader *downloader);

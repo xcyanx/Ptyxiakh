@@ -23,6 +23,9 @@ class XML
 		XML(MAUtil::String filename);
 		~XML();
 		void WriteNode(Data data);
+		void finalize();
+		int getSize();
+		MAHandle getHandle();
 
 
 	private:

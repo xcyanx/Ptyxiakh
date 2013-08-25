@@ -17,6 +17,9 @@
 #include "LogInScreen/LogIn.h"
 #include "SoundInterface/Sound.h"
 #include "PreviewScreen/PreviewScreen.h"
+#include "Common/Packets/Packet.h"
+#include <MAUtil/Connection.h>
+#include "Base64/Base64.h"
 
 
 #include <maapi.h>
@@ -32,7 +35,7 @@ using namespace NativeUI;
 
 
 class MainScreen: public ButtonListener, public StackScreen, public EditBoxListener,
-				  public StackScreenListener, public GPSListener
+				  public StackScreenListener, public GPSListener, public ConnectionListener
 {
 	public:
 		MainScreen();
@@ -57,10 +60,13 @@ class MainScreen: public ButtonListener, public StackScreen, public EditBoxListe
 		void updateList(MALocation loc);
 		virtual void compassOrientationChanged(GPS* gpsWidget, int azimuth);
 		void deleteTop(int num);
+		virtual void connectFinished(Connection *conn, int result);
+		virtual void connWriteFinished(MAUtil::Connection *conn, int result);
+		//virtual void MAUtil::ConnectionListener::connReadFinished(MAUtil::Connection *conn, int result);
 
 	//Enum
 	private:
-		enum {Start ,Options, Hyper};
+		enum {Start ,Options, Hyper, Upload};
 		//enum {NORTH = 1, SOUTH, WEST, EAST, WRONG};
 
 	private:
@@ -69,15 +75,21 @@ class MainScreen: public ButtonListener, public StackScreen, public EditBoxListe
 		LogIn *logInScreen;
 		PreviewScreen *previewScreen;
 		NativeUI::VerticalLayout *_Layout;
+		NativeUI::HorizontalLayout *_HLayout;
 		NativeUI::ListView *_ListView;
 		//MAUtil::Vector<ListViewItem*> *_ListViewItems;
-		NativeUI::Button *_Button[3];
+		NativeUI::Button *_Button[4];
 		NativeUI::EditBox *_EditBox;
 		NativeUI::GPS *_GPS;
 		Screen *screen;
 		XML *xml;
 		Data loc_data;
 		bool metersSeconds;
+		MAUtil::Connection *mConnection;
+		BasicPacket *packet;
+		char *buffer;
+
+
 		//bool mapLoaded;
 };
 

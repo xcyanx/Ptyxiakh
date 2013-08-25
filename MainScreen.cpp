@@ -8,6 +8,8 @@
 #include "MainScreen.h"
 #include <mavsprintf.h>
 
+#define URL "socket://79.167.189.40:3015"
+
 
 void MainScreen::buttonClicked(NativeUI::Widget *button)
 {
@@ -37,6 +39,15 @@ void MainScreen::buttonClicked(NativeUI::Widget *button)
 				return;
 			}
 
+			if(xml != NULL)
+			{
+				delete xml;
+
+				xml = NULL;
+			}
+
+			xml = new XML(_EditBox->getText());
+
 			optionScreen->getPinLayer()->clearLayer();
 			optionScreen->getLineLayer()->clearLayer();
 			optionScreen->getLonLatArray()->clear();
@@ -61,6 +72,7 @@ void MainScreen::buttonClicked(NativeUI::Widget *button)
 
 			_EditBox->setEnabled(false);
 			_Button[Hyper]->setEnabled(true);
+			_Button[Upload]->setEnabled(false);
 			_Button[Start]->setText("Stop tracking");
 			clicked = true;
 			//Set code here to start the tracking using a timer module.
@@ -71,13 +83,116 @@ void MainScreen::buttonClicked(NativeUI::Widget *button)
 			_EditBox->setEnabled(true);
 			_Button[Start]->setText("Start tracking");
 
+			_Button[Upload]->setEnabled(true);
+
 			clicked = false;
+
+			xml->finalize();
 
 			//optionScreen->getLonLatArray()->clear();
 
 			_GPS->removeGPSListener(optionScreen);
 			_GPS->gpsStop();
 			//Set code here to stop the tracking.
+		}
+	}
+	else if(_Button[Upload] == button)
+	{
+		mConnection->close();
+
+		mConnection->connect(URL);
+	}
+}
+
+void MainScreen::connectFinished(Connection *conn, int result)
+{
+	if(result < 0)
+	{
+		maAlert("Magna Carta", "Error while trying to upload the data.", "Ok", NULL, NULL);
+
+		if(packet != NULL)
+		{
+			delete packet;
+
+			packet = NULL;
+		}
+
+		mConnection->close();
+	}
+
+	packet = new NextPacketSize();
+
+	((NextPacketSize*)packet)->PacketID = BasicPacket::DATA_UPLOAD;
+	((NextPacketSize*)packet)->size = xml->getSize();
+
+	maFileSeek(xml->getHandle(), 0, MA_SEEK_SET);
+
+	mConnection->write(packet, sizeof(NextPacketSize));
+}
+
+void MainScreen::connWriteFinished(MAUtil::Connection *conn, int result)
+{
+	int size, remaining;
+
+	remaining = maFileSize(xml->getHandle()) - maFileTell(xml->getHandle());
+
+	if(result < 0)
+	{
+		maAlert("Magna Carta", "Error while trying to upload the data.", "Ok", NULL, NULL);
+
+		if(packet != NULL)
+		{
+			delete packet;
+
+			packet = NULL;
+		}
+
+		mConnection->close();
+
+		return;
+	}
+
+	if(remaining == 0)
+		return;
+
+	size = 256 < remaining ? 256 : remaining;
+
+	//delete buffer;
+
+	if(buffer != NULL)
+	{
+		delete buffer;
+
+		buffer = NULL;
+	}
+
+	buffer = new char[size];
+
+	memset(buffer, NULL, size);
+
+	if(!maFileRead(xml->getHandle(), buffer, size))
+	{
+		//MAUtil::String tmp = Base64::encode(buffer, xml->getSize());
+
+		//delete buffer;
+
+		//buffer = new char[tmp.size()+1];
+
+		//memset(buffer, NULL, tmp.size()+1);
+
+		//strcpy(buffer, tmp.c_str());
+
+		//lprintfln("Writting %s", buffer);
+
+		mConnection->write(buffer, size);
+	}
+	else
+	{
+		if(buffer != NULL)
+		{
+			delete buffer;
+
+			buffer = NULL;
 		}
 	}
 }
@@ -131,12 +246,6 @@ void MainScreen::editBoxReturn(EditBox *editBox)
 		return;
 	}
 
-	if(xml != NULL)
-	{
-		delete xml;
-	}
-
-	xml = new XML(editBox->getText());
 
 	//xml->CreateRoot();
 }
@@ -154,6 +263,11 @@ Option* MainScreen::getOptScr()
 MainScreen::MainScreen():StackScreen()
 {
 	//Set the StackScreenListener
+	MAExtent tSize = maGetScrSize();
+
+	int sizeX = EXTENT_X(tSize);
+	int sizeY = EXTENT_Y(tSize);
+
 	MainScreen::StackScreen::addStackScreenListener(this);
 
 	_Layout = new NativeUI::VerticalLayout();
@@ -201,15 +315,34 @@ MainScreen::MainScreen():StackScreen()
 	_Layout->addChild(_Button[Hyper]);
 	_Button[Hyper]->addButtonListener(this);
 
+	_HLayout = new NativeUI::HorizontalLayout();
+
+	_HLayout->fillSpaceHorizontally();
+	_HLayout->wrapContentVertically();
+	_Layout->addChild(_HLayout);
+
 	_Button[Start] = new NativeUI::Button();
 
-	_Button[Start]->fillSpaceHorizontally();
+	lprintfln("Screen width / 2: %d", sizeX/2);
+
+	_Button[Start]->setWidth(sizeX/2);
 	_Button[Start]->wrapContentVertically();
 	_Button[Start]->setTextHorizontalAlignment(MAW_ALIGNMENT_CENTER);
 	_Button[Start]->setTextVerticalAlignment(MAW_ALIGNMENT_CENTER);
 	_Button[Start]->setText("Start tracking");
-	_Layout->addChild(_Button[Start]);
+	_HLayout->addChild(_Button[Start]);
 	_Button[Start]->addButtonListener(this);
+
+	_Button[Upload] = new NativeUI::Button();
+
+	_Button[Upload]->setWidth(sizeX/2);
+	_Button[Upload]->wrapContentVertically();
+	_Button[Upload]->setTextHorizontalAlignment(MAW_ALIGNMENT_CENTER);
+	_Button[Upload]->setTextVerticalAlignment(MAW_ALIGNMENT_CENTER);
+	_Button[Upload]->setText("Upload route.");
+	_HLayout->addChild(_Button[Upload]);
+	_Button[Upload]->addButtonListener(this);
+	_Button[Upload]->setEnabled(false);
 
 
 
@@ -250,6 +383,12 @@ MainScreen::MainScreen():StackScreen()
 	//mapLoaded = false;
 	//loc_data.init = false;
 	//hyperScreen = NULL;
+
+	mConnection = new MAUtil::Connection(this);
+
+	packet = NULL;
+	xml = NULL;
+	buffer = NULL;
 }
 
 PreviewScreen* MainScreen::getPreviewScreen()
@@ -327,6 +466,16 @@ MainScreen::~MainScreen()
 
 	if(xml != NULL)
 		delete xml;
+
+	if(mConnection != NULL)
+	{
+		mConnection->close();
+
+		delete mConnection;
+	}
+
+	if(packet != NULL)
+		delete packet;
 
 	//Delete the screens.
 	delete hyperScreen;
