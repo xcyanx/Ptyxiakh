@@ -85,6 +85,7 @@ void LogIn::connectFinished (Connection *conn, int result)
 		mConnection.close();
 
 		_Button->setEnabled(true);
+		_Button2->setEnabled(true);
 
 		return;
 	}
@@ -113,6 +114,7 @@ void LogIn::connReadFinished(Connection *conn, int result)
 		mConnection.close();
 
 		_Button->setEnabled(true);
+		_Button2->setEnabled(true);
 
 		delete packet;
 
@@ -164,6 +166,15 @@ void LogIn::connReadFinished(Connection *conn, int result)
 
 		_Button->setEnabled(true);
 		_Button2->setEnabled(false);
+	}
+	else if(packet->PacketID == BasicPacket::ERR)
+	{
+		maAlert("Magna Carta", "An error occured. Probably the username or password were empty.", "Ok", NULL, NULL);
+
+		delete packet;
+
+		_Button->setEnabled(true);
+		_Button2->setEnabled(true);
 	}
 
 
