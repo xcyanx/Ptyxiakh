@@ -8,7 +8,7 @@
 #include "MainScreen.h"
 #include <mavsprintf.h>
 
-#define URL "socket://79.167.189.40:3015"
+#define URL "socket://79.167.58.87:3015"
 
 
 void MainScreen::buttonClicked(NativeUI::Widget *button)
@@ -120,6 +120,9 @@ void MainScreen::connectFinished(Connection *conn, int result)
 		mConnection->close();
 	}
 
+	_ActivityIndicator->setMessage("Uploading the xml data to the server.");
+	_ActivityIndicator->show();
+
 	packet = new NextPacketSize();
 
 	((NextPacketSize*)packet)->PacketID = BasicPacket::DATA_UPLOAD;
@@ -153,7 +156,11 @@ void MainScreen::connWriteFinished(MAUtil::Connection *conn, int result)
 	}
 
 	if(remaining == 0)
+	{
+		_ActivityIndicator->hide();
+
 		return;
+	}
 
 	size = 256 < remaining ? 256 : remaining;
 
@@ -280,6 +287,9 @@ MainScreen::MainScreen():StackScreen()
 	screen->setMainWidget(_Layout);
 
 	//MainScreen::StackScreen::push(screen);
+
+	_ActivityIndicator = new WaitMessage();
+
 
 
 	//Create an editbox for the filename.
@@ -483,6 +493,7 @@ MainScreen::~MainScreen()
 	delete screen;
 	delete logInScreen;
 	delete previewScreen;
+	delete _ActivityIndicator;
 }
 
 void MainScreen::updateList(MALocation loc)
@@ -509,7 +520,13 @@ void MainScreen::firstPoint(GPS *gpsWidget, MALocation loc)
 	loc_data.loc = loc;
 	loc_data.time = MAPUtil::DateTime::now();
 
+	//_ActivityIndicator->setMessage("Saving data to xml file.");
+	//_ActivityIndicator->show();
+
 	xml->WriteNode(loc_data);
+
+	//_ActivityIndicator->hide();
+
 	updateList(loc);
 
 	//gpsWidget->changeCoords(loc);
@@ -532,7 +549,12 @@ void MainScreen::hasMoved(GPS* gpsWidget, MALocation loc, MALocation old_loc)
 		//lprintfln("MainScreen(loc_data.img): %s", loc_data.imagePath.c_str());
 		//lprintfln("MainScreen(loc_data.img): %s", loc_data.videoPath.c_str());
 
+		//_ActivityIndicator->setMessage("Saving data to xml file.");
+		//_ActivityIndicator->show();
+
 		xml->WriteNode(loc_data);
+
+		//_ActivityIndicator->hide();
 
 		if(loc_data.imagePath != "" || loc_data.videoPath != "" || loc_data.text != "")
 		{

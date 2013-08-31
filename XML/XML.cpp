@@ -111,6 +111,8 @@ XML::XML(MAUtil::String filename)
 	}
 
 	CreateRoot();
+
+	_ActivityIndicator = new WaitMessage("Please, wait...", "Saving data to file.");
 }
 
 void XML::CreateRoot()
@@ -221,6 +223,8 @@ void XML::WriteNode(Data data)
 
 	if(data.imagePath.size() > 0)
 	{
+		_ActivityIndicator->show();
+
 		byte *tdata;
 		int dataLen;
 		MAUtil::String img_tag = "	<Image>";
@@ -243,11 +247,15 @@ void XML::WriteNode(Data data)
 		img_tag = "</Image>\n";
 
 		maFileWrite(file, img_tag.c_str(), img_tag.size());
+
+		_ActivityIndicator->hide();
 	}
 
 
 	if(data.videoPath.size() > 0)
 	{
+		_ActivityIndicator->show();
+
 		byte *tdata;
 		int dataLen;
 		MAUtil::String vid_tag = "	<Video>";
@@ -269,6 +277,8 @@ void XML::WriteNode(Data data)
 		vid_tag = "</Video>\n";
 
 		maFileWrite(file, vid_tag.c_str(), vid_tag.size());
+
+		_ActivityIndicator->hide();
 	}
 
 	if(data.text.size() > 0)
@@ -327,4 +337,6 @@ XML::~XML()
 {
 	CloseRoot();
 	maFileClose(file);
+
+	delete _ActivityIndicator;
 }

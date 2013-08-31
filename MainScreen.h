@@ -19,6 +19,7 @@
 #include "PreviewScreen/PreviewScreen.h"
 #include "Common/Packets/Packet.h"
 #include <MAUtil/Connection.h>
+#include "WaitMessage/WaitMessage.h"
 #include "Base64/Base64.h"
 
 
@@ -88,6 +89,7 @@ class MainScreen: public ButtonListener, public StackScreen, public EditBoxListe
 		MAUtil::Connection *mConnection;
 		BasicPacket *packet;
 		char *buffer;
+		WaitMessage* _ActivityIndicator;
 
 
 		//bool mapLoaded;

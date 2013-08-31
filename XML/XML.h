@@ -15,6 +15,7 @@
 #include <MAP/DateTime.h>
 //#include <MAFS/File.h>
 #include "../Common/DataStruct.h"
+#include "../WaitMessage/WaitMessage.h"
 
 
 class XML
@@ -39,6 +40,7 @@ class XML
 
 	private:
 		MAHandle file;
+		WaitMessage *_ActivityIndicator;
 };
 
 

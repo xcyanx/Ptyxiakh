@@ -11,7 +11,7 @@
 #include "../MainScreen.h"
 #include <mavsprintf.h>
 
-#define URL "socket://79.167.189.40:3015"
+#define URL "socket://79.167.58.87:3015"
 #define BASEURL "http://www.example.com"
 
 #define LOG(words) lprintfln(words)
