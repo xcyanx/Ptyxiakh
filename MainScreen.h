@@ -88,7 +88,7 @@ class MainScreen: public ButtonListener, public StackScreen, public EditBoxListe
 		bool metersSeconds;
 		MAUtil::Connection *mConnection;
 		BasicPacket *packet;
-		char *buffer;
+		unsigned char *buffer;
 		WaitMessage* _ActivityIndicator;
 
 

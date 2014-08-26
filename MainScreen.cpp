@@ -8,7 +8,7 @@
 #include "MainScreen.h"
 #include <mavsprintf.h>
 
-#define URL "socket://79.167.58.87:3015"
+#define URL "socket://192.168.1.100:3015"
 
 
 void MainScreen::buttonClicked(NativeUI::Widget *button)
@@ -130,6 +130,8 @@ void MainScreen::connectFinished(Connection *conn, int result)
 
 	maFileSeek(xml->getHandle(), 0, MA_SEEK_SET);
 
+	lprintfln("XML Size: %ul", xml->getSize());
+
 	mConnection->write(packet, sizeof(NextPacketSize));
 }
 
@@ -173,7 +175,7 @@ void MainScreen::connWriteFinished(MAUtil::Connection *conn, int result)
 		buffer = NULL;
 	}
 
-	buffer = new char[size];
+	buffer = new unsigned char[size];
 
 	memset(buffer, NULL, size);
 

@@ -11,7 +11,7 @@
 #include <mavsprintf.h>
 #include "../MD5/MD5.h"
 
-#define URL "socket://79.167.58.87:3014"
+#define URL "socket://192.168.1.100:3014"
 #define LOG lprintfln
 
 LogIn::LogIn(MainScreen *obj):Screen(), mConnection(this), optionWrite(-1)

@@ -11,7 +11,7 @@
 #include "../MainScreen.h"
 #include <mavsprintf.h>
 
-#define URL "socket://79.167.58.87:3015"
+#define URL "socket://192.168.1.100:3015"
 #define BASEURL "http://www.example.com"
 
 #define LOG(words) lprintfln(words)
@@ -125,8 +125,12 @@ void Option::itemSelected(PopUp* obj, int index)
 		{
 			tracking = true;
 
+			lprintfln("Index selected is 0");
+
 			return;
 		}
+
+		lprintfln("Index selected is: %d", index);
 
 		tracking = false;
 
@@ -461,6 +465,8 @@ void Option::connectFinished (Connection *conn, int result)
 			packet->PacketID = BasicPacket::DATA_REQUESTROUTES;
 
 			mConnection->write(packet, sizeof(BasicPacket));
+
+			_Button->setEnabled(true);
 
 			break;
 		}
@@ -878,14 +884,20 @@ void Option::hasMoved(GPS* gpsWidget, MALocation loc, MALocation old_loc)
 	if(!tracking)
 	{
 		MALocation tmp;
+		MAP::LonLat tmp2;
 
 		tmp.lat = loc_data[index].lat;
 		tmp.lon = loc_data[index].lon;
+
+		tmp2.lat = loc.lat;
+		tmp2.lon = loc.lon;
 
 		if(gpsWidget->coordsToMeters(loc, tmp) >= 50)
 		{
 			index++;
 		}
+
+		_Map->getViewport()->setCenterPosition(tmp2, false, false);
 
 		return;
 	}
@@ -893,17 +905,19 @@ void Option::hasMoved(GPS* gpsWidget, MALocation loc, MALocation old_loc)
 	if(gpsWidget->coordsToMeters(loc, old_loc) >= 5)
 	{
 		//lprintfln("coordsToMeters(BrowseScreen): %d", gpsWidget->coordsToMeters(loc, old_loc));
+		if(tracking)
+		{
+			MAP::LonLat tmp;
 
-		MAP::LonLat tmp;
+			tmp.lat = loc.lat;
+			tmp.lon = loc.lon;
 
-		tmp.lat = loc.lat;
-		tmp.lon = loc.lon;
+			loc_data.add(tmp);
 
-		loc_data.add(tmp);
+			_LineLayer->addPoints(loc_data);
 
-		_LineLayer->addPoints(loc_data);
-
-		_Map->getViewport()->setCenterPosition(tmp, false, false);
+			_Map->getViewport()->setCenterPosition(tmp, false, false);
+		}
 	}
 }
 

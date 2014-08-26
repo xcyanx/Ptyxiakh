@@ -15,10 +15,14 @@
 int XML::getSystemProperty(const char* key, MAUtil::String& dst)
 {
 	    int size = maGetSystemProperty(key, NULL, 0);
+
 	    if(size < 0)
 	        return size;
+
 	    dst.resize(size-1);
+
 	    maGetSystemProperty(key, dst.pointer(), size);
+
 	    return size;
 }
 
@@ -93,6 +97,8 @@ XML::XML(MAUtil::String filename)
 
 	file += ".xml";
 
+	fname = file;
+
 	XML::file = maFileOpen(file.c_str(), MA_ACCESS_READ_WRITE);
 
 	int res = maFileExists(XML::file);
@@ -110,14 +116,18 @@ XML::XML(MAUtil::String filename)
 		maPanic(0, "Error on file creation.");
 	}
 
-	CreateRoot();
+	CreateRoot(filename);
 
 	_ActivityIndicator = new WaitMessage("Please, wait...", "Saving data to file.");
 }
 
-void XML::CreateRoot()
+void XML::CreateRoot(MAUtil::String filename)
 {
-	MAUtil::String root("<root>");
+	MAUtil::String root("<root filename=\"");
+	
+	root.append(filename.c_str(), filename.length());
+	root.append("\">", 2);
+
 	maFileWrite(file, root.c_str(), root.size());
 }
 
@@ -335,6 +345,12 @@ MAUtil::String XML::dateToString(MAPUtil::DateTime time)
 
 XML::~XML()
 {
+	maFileClose(file);
+
+	file = XML::file = maFileOpen(fname.c_str(), MA_ACCESS_READ_WRITE);
+
+	maFileSeek(file, 0, MA_SEEK_END);
+
 	CloseRoot();
 	maFileClose(file);
 

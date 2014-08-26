@@ -30,7 +30,7 @@ class XML
 
 
 	private:
-		void CreateRoot();
+		void CreateRoot(MAUtil::String filename);
 		int getRemaining(MAHandle file);
 		void CloseRoot();
 		bool writeDataToXML(MAUtil::String filename);
@@ -40,6 +40,7 @@ class XML
 
 	private:
 		MAHandle file;
+		MAUtil::String fname;
 		WaitMessage *_ActivityIndicator;
 };
 

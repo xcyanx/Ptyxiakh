@@ -21,6 +21,7 @@
 <property key="build.prefs:additional.library.paths" value="%mosync-home%/lib/pipe"/>
 <property key="build.prefs:additional.library.paths/Debug" value="%mosync-home%/lib/pipe"/>
 <property key="build.prefs:additional.library.paths/Release" value="%mosync-home%/lib/pipe"/>
+<property key="build.prefs:app.name/Debug" value="Magna Carta"/>
 <property key="build.prefs:app.name/Release" value="Magna Carta"/>
 <property key="build.prefs:app.permissions" value="Camera Compass File\ Storage Internet\ Access Internet\ Access/HTTPS Location Location/Coarse Location/Fine Orientation Vibration"/>
 <property key="build.prefs:extra.link.sw/Debug" value=""/>
@@ -46,7 +47,7 @@
 <property key="build.prefs:memory.stack/Debug" value="2048"/>
 <property key="build.prefs:memory.stack/Release" value="2048"/>
 <property key="build.prefs:output.static.recompilation" value="rebuilt"/>
-<property key="build.prefs:project.type" value="app"/>
+<property key="build.prefs:project.type" value=""/>
 <property key="dependency.strategy" value="0"/>
 <property key="excludes/Debug" value=""/>
 <property key="excludes/Release" value=""/>
