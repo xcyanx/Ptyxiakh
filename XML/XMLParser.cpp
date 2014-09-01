@@ -110,8 +110,8 @@ void XMLParser::mtxTagEnd(const char* name, int len)
 
 			for(int i = 0; i < _LocDataArray.size(); i++)
 			{
-				lprintfln("Lon2 from parser: %f\n", _LocDataArray[i].loc.lon);
-				lprintfln("Lat2 from parser: %f\n", _LocDataArray[i].loc.lon);
+				lprintfln("Lon2 from parser: %lf\n", _LocDataArray[i].loc.lon);
+				lprintfln("Lat2 from parser: %lf\n", _LocDataArray[i].loc.lat);
 			}
 
 			break;

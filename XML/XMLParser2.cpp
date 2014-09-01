@@ -85,6 +85,9 @@ void XML2Parser::mtxTagEnd(const char* name, int len)
 		}
 		case NAME:
 		{
+			const MAUtil::String toFind = "\n";
+
+			buffer.remove(buffer.find(toFind), 1);
 			//create a new point and add it to the list
 			for(int i = 0; i < _Listeners.size(); i++)
 			{

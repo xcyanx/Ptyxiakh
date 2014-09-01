@@ -28,7 +28,7 @@ Option::Option(MainScreen *scr):Screen(), visible(false), _MScr(scr), DoubleClic
     _Map = new LayeredMap(0, 0, sizeX, sizeY, NULL);
 
 
-    _Src = new MAP::GoogleMapSource(MAP::GoogleMapKind_Aerial);
+    _Src = new MAP::OpenStreetMapSource();
 
 
     _Map->setViewport(new MAP::MapViewport());
@@ -105,6 +105,8 @@ Option::Option(MainScreen *scr):Screen(), visible(false), _MScr(scr), DoubleClic
 
     index = 0;
 
+    _gps.addGPSListener(this);
+
     Option::Screen::setMain(_Map);
 }
 
@@ -142,10 +144,7 @@ void Option::itemSelected(PopUp* obj, int index)
 
 		packet->PacketID = BasicPacket::DATA_REQUESTROUTEDATA;
 
-		MAUtil::String temp = ((MAUI::Label*)_RouteList->getChildren()[index])->getCaption();
-		temp.pointer()[99] = '\0';
-
-		strcpy(((RRouteData*)packet)->route_name, temp.c_str());
+		((RRouteData*)packet)->route_id = _RouteIDs[index];
 
 
 		//mConnection->write(packet, sizeof(RRouteData));
@@ -242,6 +241,7 @@ void Option::show()
 
 	//_Button->setEnabled(connected);
 	_Button->setEnabled(true);
+	_gps.gpsActivate();
 }
 
 void Option::hide()
@@ -260,6 +260,8 @@ void Option::hide()
 	_MScr->setVisible(true);
 	//_MScr->getScreen()->setVisible(true);
 	_MScr->show();
+
+	_gps.gpsStop();
 }
 
 void Option::editBoxEditingDidBegin(NativeUI::EditBox *editBox)
@@ -785,6 +787,8 @@ void Option::XMLParsed(XMLBase *obj)
 			}
 		}
 
+		_Map->getViewport()->setCenterPosition(loc_data[0], false, false);
+		lprintfln("Centered at %lf, %lf", loc_data[0].lon, loc_data[0].lat);
 		_LineLayer->addPoints(loc_data);
 	}
 }

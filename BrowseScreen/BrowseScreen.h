@@ -27,6 +27,7 @@
 #include <mastdlib.h>
 
 #include "../GPS/GPSListener.h"
+#include "../GPS/GPS.h"
 #include "LineLayer.h"
 #include "ArrowLayer.h"
 #include "PinLayer.h"
@@ -122,6 +123,7 @@ class Option:  public MAUI::Screen , public GPSListener, public NativeUI::EditBo
 		short writeOption;
 		PoI *_PoI;
 		MAUtil::Vector<int> _RouteIDs;
+		NativeUI::GPS _gps;
 		//bool operatable;
 };
 

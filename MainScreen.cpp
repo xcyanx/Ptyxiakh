@@ -58,7 +58,6 @@ void MainScreen::buttonClicked(NativeUI::Widget *button)
 			loc_data.text = "";
 
 			_GPS->gpsActivate();
-			_GPS->addGPSListener(optionScreen);
 
 			if(!_GPS->isActive())
 			{
@@ -90,8 +89,6 @@ void MainScreen::buttonClicked(NativeUI::Widget *button)
 			xml->finalize();
 
 			//optionScreen->getLonLatArray()->clear();
-
-			_GPS->removeGPSListener(optionScreen);
 			_GPS->gpsStop();
 			//Set code here to stop the tracking.
 		}
@@ -389,7 +386,7 @@ MainScreen::MainScreen():StackScreen()
 	_GPS = new GPS();
 	_GPS->setAccError(20);
 	_GPS->addGPSListener(this);
-	//_GPS->addGPSListener(optionScreen);
+	_GPS->addGPSListener(optionScreen);
 
 	metersSeconds = true;
 	//mapLoaded = false;
@@ -539,6 +536,7 @@ void MainScreen::gpsEnd(GPS* gpsWidget, MALocation loc, MALocation old_loc)
 	if(gpsWidget->coordsToMeters(loc, old_loc) >= 5)
 	{
 		gpsWidget->changeCoords(loc);
+
 	}
 }
 
@@ -554,6 +552,9 @@ void MainScreen::hasMoved(GPS* gpsWidget, MALocation loc, MALocation old_loc)
 		//_ActivityIndicator->setMessage("Saving data to xml file.");
 		//_ActivityIndicator->show();
 
+		loc_data.loc = loc;
+		loc_data.time = MAPUtil::DateTime::now();
+
 		xml->WriteNode(loc_data);
 
 		//_ActivityIndicator->hide();
@@ -568,8 +569,6 @@ void MainScreen::hasMoved(GPS* gpsWidget, MALocation loc, MALocation old_loc)
 		}
 
 
-		loc_data.loc = loc;
-		loc_data.time = MAPUtil::DateTime::now();
 		loc_data.imagePath = "";
 		loc_data.text = "";
 		loc_data.videoPath = "";
